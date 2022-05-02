@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <RootNamespace>FairyChess</RootNamespace>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>default</LangVersion>
+        <ApplicationIcon>Images\knightW.ico</ApplicationIcon>
+<!--		<PublishSingleFile>true</PublishSingleFile>-->
+<!--		<SelfContained>false</SelfContained>-->
+<!--		<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+<!--		<DebugType>embedded</DebugType>-->
+        <Authors>H2WO4</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE; DEBUG_2</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Svg" Version="3.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Images\commonerW.svg" />
+      <EmbeddedResource Include="Images\guardW.svg" />
+      <None Remove="Images\centaurW.svg" />
+      <EmbeddedResource Include="Images\centaurW.svg" />
+      <None Remove="Images\zebraB.svg" />
+      <EmbeddedResource Include="Images\zebraB.svg" />
+      <None Remove="Images\bishopW.svg" />
+      <EmbeddedResource Include="Images\bishopW.svg" />
+      <None Remove="Images\knightW.svg" />
+      <EmbeddedResource Include="Images\knightW.svg" />
+      <None Remove="Images\kingW.svg" />
+      <EmbeddedResource Include="Images\kingW.svg" />
+      <None Remove="Images\knightB.svg" />
+      <EmbeddedResource Include="Images\knightB.svg" />
+      <None Remove="Images\unicornB.svg" />
+      <EmbeddedResource Include="Images\unicornB.svg" />
+      <None Remove="Images\pawnB.svg" />
+      <EmbeddedResource Include="Images\pawnB.svg" />
+      <None Remove="Images\dragonB.svg" />
+      <EmbeddedResource Include="Images\dragonB.svg" />
+      <None Remove="Images\chancellorB.svg" />
+      <EmbeddedResource Include="Images\chancellorB.svg" />
+      <None Remove="Images\dragonW.svg" />
+      <EmbeddedResource Include="Images\dragonW.svg" />
+      <None Remove="Images\unicornW.svg" />
+      <EmbeddedResource Include="Images\unicornW.svg" />
+      <None Remove="Images\mannB.svg" />
+      <EmbeddedResource Include="Images\mannB.svg" />
+      <None Remove="Images\giraffeB.svg" />
+      <EmbeddedResource Include="Images\giraffeB.svg" />
+      <None Remove="Images\centaurB.svg" />
+      <EmbeddedResource Include="Images\centaurB.svg" />
+      <None Remove="Images\kingB.svg" />
+      <EmbeddedResource Include="Images\kingB.svg" />
+      <None Remove="Images\giraffeW.svg" />
+      <EmbeddedResource Include="Images\giraffeW.svg" />
+      <None Remove="Images\cardinalW.svg" />
+      <EmbeddedResource Include="Images\cardinalW.svg" />
+      <None Remove="Images\rookW.svg" />
+      <EmbeddedResource Include="Images\rookW.svg" />
+      <None Remove="Images\bishopB.svg" />
+      <EmbeddedResource Include="Images\bishopB.svg" />
+      <None Remove="Images\commonerB.svg" />
+      <EmbeddedResource Include="Images\guardB.svg" />
+      <None Remove="Images\chancellorW.svg" />
+      <EmbeddedResource Include="Images\chancellorW.svg" />
+      <None Remove="Images\pawnW.svg" />
+      <EmbeddedResource Include="Images\pawnW.svg" />
+      <None Remove="Images\mannW.svg" />
+      <EmbeddedResource Include="Images\mannW.svg" />
+      <None Remove="Images\cardinalB.svg" />
+      <EmbeddedResource Include="Images\cardinalB.svg" />
+      <None Remove="Images\zebraW.svg" />
+      <EmbeddedResource Include="Images\zebraW.svg" />
+      <None Remove="Images\queenW.svg" />
+      <EmbeddedResource Include="Images\queenW.svg" />
+      <None Remove="Images\rookB.svg" />
+      <EmbeddedResource Include="Images\rookB.svg" />
+      <None Remove="Images\queenB.svg" />
+      <EmbeddedResource Include="Images\queenB.svg" />
+    </ItemGroup>
+
+</Project>
