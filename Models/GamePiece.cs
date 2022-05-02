@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using FairyChess.Enums;
+﻿using FairyChess.Enums;
 using FairyChess.Models.GamePieces;
 
 
@@ -98,14 +96,20 @@ public abstract class GamePiece
                };
     }
 
+    /// <summary>
+    /// Check that the king not in check, even if the piece were to move to a new cell
+    /// </summary>
+    /// <param name="x">The x coordinate of the new cell</param>
+    /// <param name="y">The y coordinate of the new cell</param>
+    /// <returns>Whether the king is safe from check after the move</returns>
     protected bool CheckSafe(int x, int y)
     {
         GameCell cell1 = MainForm.Board[Position.x, Position.y];
         GameCell cell2 = MainForm.Board[x, y];
 
         GamePiece? king = MainForm.Board.Pieces
-                                 .OfType<PieceKing>()
-                                 .FirstOrDefault(piece => piece.Color == Color);
+                                  .OfType<PieceKing>()
+                                  .FirstOrDefault(piece => piece.Color == Color);
 
         if (king is null)
             return true;

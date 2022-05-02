@@ -39,7 +39,7 @@ partial class MainForm
                                                   GameCell.CELL_SIZE * (GameCell.NUM_ROWS + 1));
         BackColor = Color.FromArgb(22, 21, 18);
         Text      = "Fairy Chess";
-        Icon      = new Icon($"{Program.ProjectPath}Images/knightW.ico");
+        Icon      = Program.OpenIcon("knightW");
 
         // Create the grid
         for (var x = 0; x < GameCell.NUM_COLUMNS; x++)

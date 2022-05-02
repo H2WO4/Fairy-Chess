@@ -6,6 +6,6 @@ public enum MoveClass
     Move,
     Capture,
     Castle,
-    
+
     EnPassant,
 }

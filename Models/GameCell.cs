@@ -11,7 +11,7 @@ public class GameCell : PictureBox
 {
     public const int CELL_SIZE   = 96;
     public const int NUM_ROWS    = 8;
-    public const int NUM_COLUMNS = 8;
+    public const int NUM_COLUMNS = 10;
 
     #region Properties
     /// <summary>
@@ -19,7 +19,7 @@ public class GameCell : PictureBox
     /// </summary>
     public CellColor Color { get; }
 
-    public (int x, int y) Position { get; }
+    private (int x, int y) Position { get; }
 
     /// <summary>
     /// What <see cref="GamePiece"/> is currently on this cell
@@ -46,7 +46,7 @@ public class GameCell : PictureBox
     #endregion
 
     #region Methods
-    public void UpdateImage()
+    private void UpdateImage()
     {
         Image = HeldPiece?.Color switch
                 {

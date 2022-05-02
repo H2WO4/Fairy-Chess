@@ -85,6 +85,8 @@
       <EmbeddedResource Include="Images\rookB.svg" />
       <None Remove="Images\queenB.svg" />
       <EmbeddedResource Include="Images\queenB.svg" />
+      <None Remove="Images\knightW.ico" />
+      <EmbeddedResource Include="Images\knightW.ico" />
     </ItemGroup>
 
 </Project>
