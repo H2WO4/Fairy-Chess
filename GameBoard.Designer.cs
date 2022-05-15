@@ -3,7 +3,7 @@ using FairyChess.Models;
 
 namespace FairyChess;
 
-partial class MainForm
+partial class GameBoard
 {
     /// <summary>
     /// Required designer variable.
@@ -35,26 +35,26 @@ partial class MainForm
         FormBorderStyle = FormBorderStyle.FixedSingle;
         MinimizeBox     = false;
         MaximizeBox     = false;
-        ClientSize      = new System.Drawing.Size(GameCell.CELL_SIZE * (GameCell.NUM_COLUMNS + 1), 
-                                                  GameCell.CELL_SIZE * (GameCell.NUM_ROWS + 1));
+        ClientSize      = new System.Drawing.Size(GameBoard.CELL_SIZE * (GameBoard.NUM_COLUMNS + 1), 
+                                                  GameBoard.CELL_SIZE * (GameBoard.NUM_ROWS + 1));
         BackColor = Color.FromArgb(22, 21, 18);
         Text      = "Fairy Chess";
         Icon      = Program.OpenIcon("knightW");
 
         // Create the grid
-        for (var x = 0; x < GameCell.NUM_COLUMNS; x++)
-        for (var y = 0; y < GameCell.NUM_ROWS; y++)
+        for (var x = 0; x < GameBoard.NUM_COLUMNS; x++)
+        for (var y = 0; y < GameBoard.NUM_ROWS; y++)
         {
             var cell = new GameCell(x, y);
             cell.Parent    = this;
-            cell.Size      = new Size(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-            cell.Left      = x * GameCell.CELL_SIZE + GameCell.CELL_SIZE - GameCell.CELL_SIZE / 2;
-            cell.Top       = (GameCell.NUM_ROWS - y - 1) * GameCell.CELL_SIZE + GameCell.CELL_SIZE - GameCell.CELL_SIZE / 2;
+            cell.Size      = new Size(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+            cell.Left      = x * GameBoard.CELL_SIZE + GameBoard.CELL_SIZE - GameBoard.CELL_SIZE / 2;
+            cell.Top       = (GameBoard.NUM_ROWS - y - 1) * GameBoard.CELL_SIZE + GameBoard.CELL_SIZE - GameBoard.CELL_SIZE / 2;
             cell.BackColor = cell.Color is CellColor.Light
                                  ? Colors.NeutralLight
                                  : Colors.NeutralDark;
 
-            _grid[x + GameCell.NUM_COLUMNS * y] = cell;
+            _grid[x + GameBoard.NUM_COLUMNS * y] = cell;
         }
     }
 }

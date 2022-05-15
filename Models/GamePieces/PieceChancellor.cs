@@ -32,8 +32,8 @@ public class PieceChancellor : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("chancellorW");
         SvgDocument svgBlack = Program.OpenSVG("chancellorB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class PieceChancellor : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell cell = MainForm.Board[end.x, end.y];
+        GameCell cell = GameBoard.Main[end.x, end.y];
         MoveClass output =
             delta switch
             {
@@ -78,7 +78,7 @@ public class PieceChancellor : GamePiece
                 _ => MoveClass.None,
             };
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 
@@ -102,16 +102,16 @@ public class PieceChancellor : GamePiece
                    var (a, b) when a * a + b * b == 5 => true,
 
                    (> 0, 0) => CanCaptureTo(end.x - 1, end.y)
-                            && MainForm.Board[end.x - 1, end.y].HeldPiece is null,
+                            && GameBoard.Main[end.x - 1, end.y].HeldPiece is null,
 
                    (< 0, 0) => CanCaptureTo(end.x + 1, end.y)
-                            && MainForm.Board[end.x + 1, end.y].HeldPiece is null,
+                            && GameBoard.Main[end.x + 1, end.y].HeldPiece is null,
 
                    (0, > 0) => CanCaptureTo(end.x, end.y - 1)
-                            && MainForm.Board[end.x, end.y - 1].HeldPiece is null,
+                            && GameBoard.Main[end.x, end.y - 1].HeldPiece is null,
 
                    (0, < 0) => CanCaptureTo(end.x, end.y + 1)
-                            && MainForm.Board[end.x, end.y + 1].HeldPiece is null,
+                            && GameBoard.Main[end.x, end.y + 1].HeldPiece is null,
 
                    _ => false,
                };

@@ -32,8 +32,8 @@ public class PieceGuard : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("guardW");
         SvgDocument svgBlack = Program.OpenSVG("guardB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,13 +50,13 @@ public class PieceGuard : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell cell = MainForm.Board[end.x, end.y];
+        GameCell cell = GameBoard.Main[end.x, end.y];
         MoveClass output =
             delta is (-1 or 0 or 1, -1 or 0 or 1)
                 ? EatOrMove(cell.HeldPiece)
                 : MoveClass.None;
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 

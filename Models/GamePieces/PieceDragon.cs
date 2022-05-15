@@ -32,8 +32,8 @@ public class PieceDragon : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("dragonW");
         SvgDocument svgBlack = Program.OpenSVG("dragonB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class PieceDragon : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell cell = MainForm.Board[end.x, end.y];
+        GameCell cell = GameBoard.Main[end.x, end.y];
         MoveClass output =
             delta switch
             {
@@ -75,7 +75,7 @@ public class PieceDragon : GamePiece
                 _ => MoveClass.None,
             };
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 
@@ -97,16 +97,16 @@ public class PieceDragon : GamePiece
                    (-1 or 1, -1 or 1) => true,
 
                    (>= 2, -1 or 1) => CanCaptureTo(end.x - 1, end.y)
-                                   && MainForm.Board[end.x - 1, end.y].HeldPiece is null,
+                                   && GameBoard.Main[end.x - 1, end.y].HeldPiece is null,
 
                    (<= -2, -1 or 1) => CanCaptureTo(end.x + 1, end.y)
-                                    && MainForm.Board[end.x + 1, end.y].HeldPiece is null,
+                                    && GameBoard.Main[end.x + 1, end.y].HeldPiece is null,
 
                    (-1 or 1, >= 2) => CanCaptureTo(end.x, end.y - 1)
-                                   && MainForm.Board[end.x, end.y - 1].HeldPiece is null,
+                                   && GameBoard.Main[end.x, end.y - 1].HeldPiece is null,
 
                    (-1 or 1, <= -2) => CanCaptureTo(end.x, end.y + 1)
-                                    && MainForm.Board[end.x, end.y + 1].HeldPiece is null,
+                                    && GameBoard.Main[end.x, end.y + 1].HeldPiece is null,
 
                    _ => false,
                };

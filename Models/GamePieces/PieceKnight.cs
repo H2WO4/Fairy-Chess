@@ -32,8 +32,8 @@ public class PieceKnight : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("knightW");
         SvgDocument svgBlack = Program.OpenSVG("knightB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -52,10 +52,10 @@ public class PieceKnight : GamePiece
         // Determines the result
         MoveClass output =
             delta.x * delta.x + delta.y * delta.y == 5
-                ? EatOrMove(MainForm.Board[end.x, end.y].HeldPiece)
+                ? EatOrMove(GameBoard.Main[end.x, end.y].HeldPiece)
                 : MoveClass.None;
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 

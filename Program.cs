@@ -16,7 +16,7 @@ public static class Program
     public static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(MainForm.Board);
+        Application.Run(GameBoard.Main);
     }
 
     /// <summary>

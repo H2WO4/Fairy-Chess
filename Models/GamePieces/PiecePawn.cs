@@ -32,8 +32,8 @@ public class PiecePawn : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("pawnW");
         SvgDocument svgBlack = Program.OpenSVG("pawnB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class PiecePawn : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell  cell = MainForm.Board[x, y];
+        GameCell  cell = GameBoard.Main[x, y];
         MoveClass output;
         switch (delta)
         {
@@ -84,11 +84,11 @@ public class PiecePawn : GamePiece
 
             // White & Black - En Passant
             case (-1 or 1, 1) when cell.HeldPiece is null
-                                && MainForm.Board[x, y - 1].HeldPiece is
+                                && GameBoard.Main[x, y - 1].HeldPiece is
                                        PiecePawn { Color: PieceColor.Black, TurnSinceMoved: 1 }
                                 && Color is PieceColor.White:
             case (-1 or 1, -1) when cell.HeldPiece is null
-                                 && MainForm.Board[x, y + 1].HeldPiece is
+                                 && GameBoard.Main[x, y + 1].HeldPiece is
                                         PiecePawn { Color: PieceColor.White, TurnSinceMoved: 1 }
                                  && Color is PieceColor.Black:
                 output = MoveClass.EnPassant;
@@ -102,7 +102,7 @@ public class PiecePawn : GamePiece
                 break;
         }
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 

@@ -32,8 +32,8 @@ public class PieceUnicorn : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("unicornW");
         SvgDocument svgBlack = Program.OpenSVG("unicornB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class PieceUnicorn : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell cell = MainForm.Board[end.x, end.y];
+        GameCell cell = GameBoard.Main[end.x, end.y];
         MoveClass output =
             delta switch
             {
@@ -96,7 +96,7 @@ public class PieceUnicorn : GamePiece
                 _ => MoveClass.None,
             };
 
-        output = CheckSafe(end.x, end.y)
+        output = output is not MoveClass.None && CheckSafe(end.x, end.y)
                      ? output
                      : MoveClass.None;
 
@@ -120,31 +120,31 @@ public class PieceUnicorn : GamePiece
 
                    (var a and > 0, var b) when a + 1 == b
                        => CanCaptureTo(end.x - 1, end.y - 1)
-                       && MainForm.Board[end.x - 1, end.y - 1].HeldPiece is null,
+                       && GameBoard.Main[end.x - 1, end.y - 1].HeldPiece is null,
                    (var a and > 0, var b) when a + 1 == -b
                        => CanCaptureTo(end.x - 1, end.y + 1)
-                       && MainForm.Board[end.x - 1, end.y + 1].HeldPiece is null,
+                       && GameBoard.Main[end.x - 1, end.y + 1].HeldPiece is null,
 
                    (var a and < 0, var b) when a - 1 == b
                        => CanCaptureTo(end.x + 1, end.y + 1)
-                       && MainForm.Board[end.x + 1, end.y + 1].HeldPiece is null,
+                       && GameBoard.Main[end.x + 1, end.y + 1].HeldPiece is null,
                    (var a and < 0, var b) when a - 1 == -b
                        => CanCaptureTo(end.x + 1, end.y - 1)
-                       && MainForm.Board[end.x + 1, end.y - 1].HeldPiece is null,
+                       && GameBoard.Main[end.x + 1, end.y - 1].HeldPiece is null,
 
                    (var a and < 0, var b) when a + 1 == b
                        => CanCaptureTo(end.x + 1, end.y + 1)
-                       && MainForm.Board[end.x + 1, end.y].HeldPiece is null,
+                       && GameBoard.Main[end.x + 1, end.y].HeldPiece is null,
                    (var a and < 0, var b) when a + 1 == -b
                        => CanCaptureTo(end.x + 1, end.y - 1)
-                       && MainForm.Board[end.x + 1, end.y - 1].HeldPiece is null,
+                       && GameBoard.Main[end.x + 1, end.y - 1].HeldPiece is null,
 
                    (var a and > 0, var b) when a - 1 == b
                        => CanCaptureTo(end.x - 1, end.y - 1)
-                       && MainForm.Board[end.x - 1, end.y - 1].HeldPiece is null,
+                       && GameBoard.Main[end.x - 1, end.y - 1].HeldPiece is null,
                    (var a and > 0, var b) when a - 1 == -b
                        => CanCaptureTo(end.x - 1, end.y + 1)
-                       && MainForm.Board[end.x - 1, end.y + 1].HeldPiece is null,
+                       && GameBoard.Main[end.x - 1, end.y + 1].HeldPiece is null,
 
                    _ => false,
                };

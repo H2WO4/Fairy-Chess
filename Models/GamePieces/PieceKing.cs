@@ -32,8 +32,8 @@ public class PieceKing : GamePiece
         SvgDocument svgWhite = Program.OpenSVG("kingW");
         SvgDocument svgBlack = Program.OpenSVG("kingB");
 
-        WhiteImage = svgWhite.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
-        BlackImage = svgBlack.Draw(GameCell.CELL_SIZE, GameCell.CELL_SIZE);
+        WhiteImage = svgWhite.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
+        BlackImage = svgBlack.Draw(GameBoard.CELL_SIZE, GameBoard.CELL_SIZE);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class PieceKing : GamePiece
                        delta = (end.x - start.x, end.y - start.y);
 
         // Determines the result
-        GameCell cell = MainForm.Board[end.x, end.y];
+        GameCell cell = GameBoard.Main[end.x, end.y];
         MoveClass output =
             delta switch
             {
@@ -62,11 +62,7 @@ public class PieceKing : GamePiece
 
                 _ => MoveClass.None,
             };
-
-        output = CheckSafe(end.x, end.y)
-                     ? output
-                     : MoveClass.None;
-
+        
         // Cache the result
         MoveCache[(this, x, y)] = output;
 
@@ -85,13 +81,13 @@ public class PieceKing : GamePiece
 
     private bool IsInCheck(int x, int y)
     {
-        GameCell cell1 = MainForm.Board[Position.x, Position.y];
-        GameCell cell2 = MainForm.Board[x, y];
+        GameCell cell1 = GameBoard.Main[Position.x, Position.y];
+        GameCell cell2 = GameBoard.Main[x, y];
 
         GamePiece? temp = cell2.HeldPiece;
         cell1.HeldPiece = null;
         cell2.HeldPiece = this;
-        bool output = MainForm.Board.Pieces
+        bool output = GameBoard.Main.Pieces
                               .Where(piece => piece.Color != Color)
                               .Any(piece => piece.CanCaptureTo(x, y));
 
